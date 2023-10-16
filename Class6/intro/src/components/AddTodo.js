@@ -1,6 +1,7 @@
 import '../styles/Todo.css'
 import Button from '../components/Button'
 import {useState} from 'react'
+import axios from 'axios';
 
 const AddTodo = () => {
 
@@ -9,14 +10,24 @@ const AddTodo = () => {
     const handleInput = (event) =>{
         setTask(event.target.value)
     }
+    const handleSubmit = async() =>{
+      let body = {
+        name: task,
+        isCompleted: false,
+        date:'oct 16 2023'
 
-    console.log(task)
+      }
+      let response = await axios.post("https://tough-goat-visor.cyclic.app/task",body)
+
+       setTask('')
+    }
+
     return (
         <div id="input_container">
             <div className="AddToDo">
-                <input type='text' onChange={(event)=> handleInput(event)} />
+                <input type='text' value={task} onChange={(event)=> handleInput(event)} />
             </div>
-            <Button />
+            <Button func={handleSubmit} />
         </div>
 
     )

@@ -1,8 +1,8 @@
 import ButtonIcon from '../assets/icons/Add_Plus.png';
 
-const Button = () => {
+const Button = (props) => {
     return (
-        <button>
+        <button onClick={props.func}>
             <img src={ButtonIcon} alt="Button Icon" />
         </button>
     )

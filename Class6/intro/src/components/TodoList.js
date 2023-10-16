@@ -1,9 +1,29 @@
 import '../styles/Todo.css'
+import { useEffect, useState } from 'react';
+import axios from 'axios'
+
 const TodoList = () => {
+
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        const getData = async () => {
+            let data = await axios.get('https://tough-goat-visor.cyclic.app/task')
+            setData(data.data.reverse())
+        }
+
+        getData()
+    })
+
+
     return (
-        <div className="TodoList">
-           <input type='checkbox'/>
-           <p> go and cook </p>
+        <div>
+             {data ? data.map((item, index) =>
+                <div className="TodoList">
+                    <input type='checkbox' />
+                    <p> {item.name} </p>
+                </div>
+            ) : ''} 
         </div>
     )
 };
